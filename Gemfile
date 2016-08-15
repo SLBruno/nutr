@@ -16,6 +16,7 @@ gem 'devise', '~> 3.3.0'
 gem 'aws-sdk', '~> 1.20.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
+gem 'unitwise'
 
 group :development, :test do
      gem 'sqlite3'
