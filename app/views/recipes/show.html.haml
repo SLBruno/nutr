@@ -17,6 +17,9 @@
 				%ul
 					- @recipe.ingredients.each do |ingredient|
 						%li= ingredient.name
+					Está presente nas seguintes listas:
+					- @recipe.lists.each do |list|
+						%li= list.title
 
 		.col-md-6
 			#directions
@@ -27,6 +30,8 @@
 
 	.row
 		.col-md-12
+			.p
+			= link_to "adicionar a minha lista", listrecipe_recipe_path
 			= link_to "Back", root_path, class: "btn btn-default"
 			- if user_signed_in?
 				= link_to "Edit", edit_recipe_path, class: "btn btn-default"

@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users
- resources :recipes
+  	resources :lists
 
- root "recipes#index"
+  	devise_for :users 
+ 	resources :recipes do
+ 		member do 
+ 			get '/listrecipe', to: 'recipes#listit'
+ 		end 
+ 	end 
+
+ 	root "recipes#index"
+
+  	
+
 end

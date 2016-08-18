@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140922223403) do
+ActiveRecord::Schema.define(version: 20160818145323) do
 
   create_table "directions", force: true do |t|
     t.text     "step"
@@ -30,6 +30,28 @@ ActiveRecord::Schema.define(version: 20140922223403) do
   end
 
   add_index "ingredients", ["recipe_id"], name: "index_ingredients_on_recipe_id"
+
+  create_table "listings", force: true do |t|
+    t.integer  "list_id"
+    t.integer  "recipe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "listings", ["list_id", "recipe_id"], name: "index_listings_on_list_id_and_recipe_id", unique: true
+  add_index "listings", ["list_id"], name: "index_listings_on_list_id"
+  add_index "listings", ["recipe_id"], name: "index_listings_on_recipe_id"
+
+  create_table "lists", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "lists", ["user_id", "created_at"], name: "index_lists_on_user_id_and_created_at"
+  add_index "lists", ["user_id"], name: "index_lists_on_user_id"
 
   create_table "recipes", force: true do |t|
     t.string   "title"

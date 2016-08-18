@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @list.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @list.description %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @list.user %>
+</p>
+
+<p>
+	<% @list.recipes.each do |recipe| %>
+	<div class="panel panel-index">
+	<p><%= recipe.title %></p>
+	<p><% recipe.ingredients.each do |ingredient| %></p>
+	<p><%= ingredient.name %>
+	<% end %> 
+	</div>
+	<% end %> 
+
+<%= link_to 'Edit', edit_list_path(@list) %> |
+<%= link_to 'Back', lists_path %>

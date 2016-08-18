@@ -7,7 +7,15 @@ class RecipesController < ApplicationController
 	end
 
 	def show
+		@recipe = find_recipe
 	end
+
+	def listit
+		@recipe = Recipe.find(params[:id])
+		@listing = @recipe.listings.build({:recipe_id => @recipe.id, :list_id => 1}) 
+		# @listing = Listing.create(:recipe_id => @recipe.id, :list_id => 1)
+		redirect_to @recipe, notice: "deu certo"	
+	end 
 
 	def new
 		@recipe = current_user.recipes.build
