@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
 
 	def listit
 		@recipe = Recipe.find(params[:id])
-		@list = List.find(params[:id])
+		@list = List.find(params[:list_id])
 		# @listing = @recipe.listings.build({:recipe_id => @recipe.id, :list_id => @list.id }) 
 		@listing = Listing.create(:recipe_id => @recipe.id, :list_id => @list.id)
 		redirect_to @recipe, notice: "deu certo"	
@@ -51,7 +51,7 @@ class RecipesController < ApplicationController
 	private
 
 	def recipe_params
-		params.require(:recipe).permit(:title, :description, :image, ingredients_attributes: [:id, :name, :_destroy], directions_attributes: [:id, :step, :_destroy])
+		params.require(:recipe).permit(:title, :description, :image, ingredients_attributes: [:id, :name, :measure, :unit, :_destroy], directions_attributes: [:id, :step, :_destroy])
 	end
 
 	def find_recipe

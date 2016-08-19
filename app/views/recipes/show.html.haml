@@ -13,10 +13,15 @@
 	.row
 		.col-md-6
 			#ingredients
-				%h2 Ingredients
+				%h2 Ingredientes
 				%ul
 					- @recipe.ingredients.each do |ingredient|
-						%li= ingredient.name
+						%li
+							= ingredient.unit
+							= ingredient.measure
+							| 
+							= ingredient.name
+
 					%h2 Esta Receita está presente nas seguintes listas:
 					- @recipe.lists.each do |list|
 						%li= list.title

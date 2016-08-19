@@ -15,15 +15,24 @@
   <%= @list.user %>
 </p>
 
-<p>
-	<% @list.recipes.each do |recipe| %>
-	<div class="panel panel-index">
-	<p><%= recipe.title %></p>
-	<p><% recipe.ingredients.each do |ingredient| %></p>
-	<p><%= ingredient.name %>
-	<% end %> 
-	</div>
-	<% end %> 
+<div class="row">
+	<div class="col-md-6">
+		<% @list.recipes.each do |recipe| %>
+		<div class="panel panel-index">
+		<strong><%= recipe.title %></strong>
+		<p><% recipe.ingredients.each do |ingredient| %></p>
+		<p><%= ingredient.unit %> <%= ingredient.measure %> | <%= ingredient.name %></p>
 
-<%= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', lists_path %>
+		<% end %> 
+		</div>
+		<% end %>
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-index">
+		<h3>SOMA DE TODOS OS INGREDIENTES PORRA!!</h3>
+		</div>
+	</div> 
+</div>
+
+<%= link_to 'Editar Lista', edit_list_path(@list) %> |
+<%= link_to 'Voltar', lists_path %>
