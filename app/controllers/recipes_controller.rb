@@ -12,8 +12,9 @@ class RecipesController < ApplicationController
 
 	def listit
 		@recipe = Recipe.find(params[:id])
-		@listing = @recipe.listings.build({:recipe_id => @recipe.id, :list_id => 1}) 
-		# @listing = Listing.create(:recipe_id => @recipe.id, :list_id => 1)
+		@list = List.find(params[:id])
+		# @listing = @recipe.listings.build({:recipe_id => @recipe.id, :list_id => @list.id }) 
+		@listing = Listing.create(:recipe_id => @recipe.id, :list_id => @list.id)
 		redirect_to @recipe, notice: "deu certo"	
 	end 
 

@@ -17,7 +17,7 @@
 				%ul
 					- @recipe.ingredients.each do |ingredient|
 						%li= ingredient.name
-					Está presente nas seguintes listas:
+					%h2 Esta Receita está presente nas seguintes listas:
 					- @recipe.lists.each do |list|
 						%li= list.title
 
@@ -30,7 +30,15 @@
 
 	.row
 		.col-md-12
-			.p
+			%h2 Selecione uma de suas Listas para adicionar a sua receita!
+			- current_user.lists.each do |list|
+				%p
+					= link_to list.title, {:controller => "recipes", :action => "listit", :list_id => list.id }
+					= list.id
+
+
+
+			%p 
 			= link_to "adicionar a minha lista", listrecipe_recipe_path
 			= link_to "Back", root_path, class: "btn btn-default"
 			- if user_signed_in?
