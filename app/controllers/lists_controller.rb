@@ -10,7 +10,10 @@ class ListsController < ApplicationController
   # GET /lists/1
   # GET /lists/1.json
   def show
-  end
+    @list = List.find(params[:id])
+    @recipes = @list.recipes.select(:id)
+    @ingredients = Ingredient.where(:recipe_id => @recipes).group(:measure, :name).sum(:unit)
+end 
 
   # GET /lists/new
   def new

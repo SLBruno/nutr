@@ -1,25 +1,24 @@
 <p id="notice"><%= notice %></p>
 
+<h1><%= @list.title %></h1>
+
+
 <p>
-  <strong>Title:</strong>
-  <%= @list.title %>
+<%= @list.description %>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @list.description %>
-</p>
-
-<p>
-  <strong>User:</strong>
+  <strong>criado por:</strong>
   <%= @list.user %>
 </p>
 
+
 <div class="row">
+	<h2> Receitas: </h2>
 	<div class="col-md-6">
 		<% @list.recipes.each do |recipe| %>
-		<div class="panel panel-index">
-		<strong><%= recipe.title %></strong>
+		<div class="panel panel-default">
+		<strong><%= link_to recipe.title, recipe_path %></strong>
 		<p><% recipe.ingredients.each do |ingredient| %></p>
 		<p><%= ingredient.unit %> <%= ingredient.measure %> | <%= ingredient.name %></p>
 
@@ -28,8 +27,15 @@
 		<% end %>
 	</div>
 	<div class="col-md-6">
-		<div class="panel panel-index">
+		<div class="panel panel-default">
 		<h3>SOMA DE TODOS OS INGREDIENTES PORRA!!</h3>
+		<% @ingredients.each do |key, unit| %>
+		<p><%= unit %> 
+			<% key.each do |name, measure| %> 
+				<%= name %>
+				<%= measure %>
+				<% end %></p>
+		<% end %> 
 		</div>
 	</div> 
 </div>
