@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160819013700) do
+ActiveRecord::Schema.define(version: 20160831222024) do
 
   create_table "directions", force: true do |t|
     t.text     "step"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20160819013700) do
     t.datetime "updated_at"
     t.integer  "unit"
     t.string   "measure"
+    t.integer  "unitconverted"
+    t.string   "measureconverted"
   end
 
   add_index "ingredients", ["recipe_id"], name: "index_ingredients_on_recipe_id"

@@ -12,7 +12,8 @@ class ListsController < ApplicationController
   def show
     @list = List.find(params[:id])
     @recipes = @list.recipes.select(:id)
-    @ingredients = Ingredient.where(:recipe_id => @recipes).group(:measure, :name).sum(:unit)
+    @ingredients = Ingredient.where(:recipe_id => @recipes)
+    @ingredientsconsolidated = @ingredients.group(:measureconverted, :name).sum(:unitconverted)
 end 
 
   # GET /lists/new
@@ -31,7 +32,7 @@ end
 
     respond_to do |format|
       if @list.save
-        format.html { redirect_to @list, notice: 'List was successfully created.' }
+        format.html { redirect_to @list, notice: 'A Lista foi criada!.' }
         format.json { render :show, status: :created, location: @list }
       else
         format.html { render :new }
@@ -45,7 +46,7 @@ end
   def update
     respond_to do |format|
       if @list.update(list_params)
-        format.html { redirect_to @list, notice: 'List was successfully updated.' }
+        format.html { redirect_to @list, notice: 'A Lista foi atualizada!' }
         format.json { render :show, status: :ok, location: @list }
       else
         format.html { render :edit }
