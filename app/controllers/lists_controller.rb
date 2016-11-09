@@ -11,10 +11,33 @@ class ListsController < ApplicationController
   # GET /lists/1.json
   def show
     @list = List.find(params[:id])
-    @recipes = @list.recipes.select(:id)
-    @ingredients = Ingredient.where(:recipe_id => @recipes)
-    @ingredientsconsolidated = @ingredients.group(:measureconverted, :name).sum(:unitconverted)
+    @listing = Listing.where(list_id: @list.id)
+    @recipe = @list.recipes.select(:id)
+    @ingredients = @list.ingredients
+    consolidate_ingredients
+    listmultiplier
+
 end 
+
+  def listmultiplier
+    @ming = []
+    #pegar cada listing e definir qual é a porção
+    @listing.each do |a| 
+      porcao = a.portionquantity 
+      #abrir cada um dos ingredientes e multiplicar pela porção
+      a.ingredients.each do |i|
+        unitmultiplied = i.unitconverted * porcao 
+        b = [unit: unitmultiplied.to_i, measure: i.measureconverted.to_s, name: i.name.to_s]
+        @ming << b
+        #salvar em uma array 
+      end
+      #agrupar pelo name
+      #@ming2 = @ming.group_by { |a| 
+        #a[:name] }
+      end 
+    print @ming2
+
+  end 
 
   # GET /lists/new
   def new
@@ -74,5 +97,32 @@ end
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
       params.require(:list).permit(:title, :description, :user_id)
+    end
+
+    #def multiply_by_portionquantity
+      #puxo todas as receitas desta lista
+      #@list.recipes.each do |recipe|
+        #para cada uma delas, eu descubro qual é a portion_quantity
+        #recipe.listings.each do |listing|
+        #  @portion = listing.portionquantity
+        #end
+        #multiplico cada um dos ingredientes pela portion quantity
+        #@ingredients_multiplied = recipe.ingredients.each do |ingredient|
+        #  ingredient.unitconverted * 2
+        #end
+      #end
+    #end
+    def multiply_ingredients
+
+    end
+
+    def consolidate_ingredients
+      @ingredientsconsolidated = @ingredients.group(:measureconverted, :name).sum(:unitconverted)
+      #SELECT sum(ingredients.unitconverted), measureconverted, name
+      #FROM ingredients
+      #INNER JOIN recipes ON ingredients.recipe_id = recipe.id
+      #INNER JOIN listings ON recipes.id = listings.recipe_id 
+      # => WHERE listings.list_id = ?
+      
     end
 end

@@ -5,7 +5,8 @@ class RecipesController < ApplicationController
 
 	def index
 		## ordena as receitas por tempo de criação
-		@recipe = Recipe.all.order("created_at DESC")
+		@recipe = Recipe.all.order("created_at DESC").limit(8)
+		@list = List.all.order("created_at DESC")
 	end
 
 	def show
@@ -17,9 +18,10 @@ class RecipesController < ApplicationController
 		@recipe = Recipe.find(params[:id])
 		@list = List.find(params[:list_id])
 		#criar a associação Listing entre receita e lista
-		@listing = Listing.create(:recipe_id => @recipe.id, :list_id => @list.id)
+		@listing = Listing.create(:recipe_id => @recipe.id, :list_id => @list.id, :portionquantity => 1)
 		redirect_to @recipe, notice: "deu certo"	
 	end 
+
 
 	def new
 		@recipe = current_user.recipes.build
@@ -29,14 +31,17 @@ class RecipesController < ApplicationController
 		@recipe = current_user.recipes.build(recipe_params)
 		if @recipe.save
 		#unitwise para converter
-		@recipe.ingredients.each do |ingredient|
-			if ingredient.measure == 'ml' || 'colher de sopa ml'
-			@ingredientconverted = Unitwise(ingredient.unit, ingredient.measure).to_ml
-			ingredient.update_attribute(:unitconverted, @ingredientconverted.value )
-			ingredient.update_attribute(:measureconverted, "Mililitros")
+			@recipe.ingredients.each do |ingredient|
+				if ingredient.measure == "Unidades"
+					ingredient.update_attribute(:unitconverted, ingredient.unit )
+					ingredient.update_attribute(:measureconverted, "Unidades")
+				elsif ingredient.measure == "ml" || "colher de sopa ml"
+					@ingredientconverted = Unitwise(ingredient.unit, ingredient.measure).to_ml
+					ingredient.update_attribute(:unitconverted, @ingredientconverted.value )
+					ingredient.update_attribute(:measureconverted, "ML")
 			end
 		end
-			redirect_to @recipe, notice: "Successfully created new recipe"
+			redirect_to @recipe, notice: "Receita criada!!"
 		else
 			render 'new'
 		end

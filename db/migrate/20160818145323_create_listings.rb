@@ -9,7 +9,7 @@ class CreateListings < ActiveRecord::Migration
     change_table :listings do |t|
 		t.index :list_id
 		t.index :recipe_id
-		t.index [:list_id, :recipe_id], unique: true
+		t.index [:list_id, :recipe_id]
 	end 
 	end 
 end
