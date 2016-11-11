@@ -17,132 +17,271 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-@mixin box-shadow {
-	-webkit-box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
-	-moz-box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
-	box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
+$main: #252529;
+$secondary: #8b8b9f;
+$highlight:	#73e298;
+$white: #FFFFFF;
+
+* {
+	box-sizing: border-box;
 }
 
-$red: #DB6161;
-
-body {
-	background: rgb(235, 238, 243);
+html, body {
+	font-family: 'Open Sans', sans-serif;
 }
 
-.main_content {
-	padding: 0 0 50px 0;
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: table;
 }
 
-.alert {
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 5px;
-	@include box-shadow;
-	background: white;
-	font-weight: bold;
+.clearfix:after {
+	clear: both;
 }
 
-.navbar {
-	margin-bottom: 50px;
-	@include box-shadow;
-	border: none;
-	.navbar-brand {
+.wrapper {
+	width: 1440px;
+	max-width: 90%;
+	margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 300;
+}
+
+#top_header {
+	padding: 1.5em 0;
+	.logo {
+		float: left;
 		text-transform: uppercase;
-		letter-spacing: -1px;
-		font-weight: bold;
-		font-size: 25px;
+		font-size: 1.15em;
+		font-weight: 700;
+		span {
+			font-weight: 300;
+			color: $highlight;
+		}
+	}
+	#main_nav {
+		float: right;
+		font-size: .9em;
+		padding-top: 1em;
 		a {
-			color: $red;
+			color: $secondary;
+			text-decoration: none;
+			margin-left: 1em;
 		}
 	}
 }
 
-.recipe {
-	background: white;
-	border-radius: 5px;
-	margin-bottom: 40px;
-	@include box-shadow;
-	.image_wrapper {
-		max-width: 100%;
-		border-radius: 5px 5px 0 0;
-		overflow: hidden;
-	}
-	img {
-		width: 100%;
-		-webkit-transition: all .3s ease-out;
-	  -moz-transition: all .3s ease-out;
-	  -o-transition: all .3s ease-out;
-    transition: all .3s ease-out;
-		&:hover {
-			transform: scale(1.075);
+.navbar-default {
+	margin-bottom: 0px;
+}
+
+.indeximage {
+	width: 100%;
+	max-width: 100%;
+	border-radius: .5em;
+}
+
+.indexpanel {
+		width: 275px;
+		position: relative;
+		float: left;
+		.featured_image {
+			width: 100%;
+			max-width: 100%;
+			border-radius: .5em;
+			-webkit-box-shadow: 0px 0px 76px 0px rgba(0, 0, 0, 0.47);
+			-moz-box-shadow: 0px 0px 76px 0px rgba(0, 0, 0, 0.47);
+		  box-shadow: 0px 0px 76px 0px rgba(0, 0, 0, 0.47);
 		}
+		.play_button {
+			position: absolute;
+			width: 80px;
+			left: 50%;
+			top: 50%;
+			margin: -40px 0 0 -40px;
+		}
+	} 
+
+#banner {
+	background: url('index-background.jpeg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	padding: 6.5em 0;
+	#banner_content_wrapper {
+		width: 900px;
+		max-width: 90%;
+		margin: 0 auto;
+		display: flex;
+		justify-content: center;
+		align-items: center
+	}
+	#content {
+		float: left;
+		width: 500px;
+		margin-left: 100px;
+		.title {
+			display: inline;
+			font-size: 1.75em;
+			color: $white;
+		}
+		.ratings {
+			display: inline;
+			margin-left: 1em;
+			i {
+				color: $highlight;
+				font-size: 1.35em;
+				margin: 0 .15em;
+			}
+			.inactive {
+				color: #48494d;
+			}
+		}
+		.description {
+			color: #bbbebf;
+			font-size: 1em;
+			line-height: 2;
+		}
+		.info {
+			color: $white;
+			font-size: .8em;
+			font-weight: 700;
+			margin-top: 3em;
+			span {
+				margin: 0 .5em;
+			}
+		}
+	}
+}
+
+#top_movies, #top_shows {
+	padding: 5em 0;
+	header {
+		padding: 0 0 1.5em 0;
+		h2, .view_more {
+			display: inline;
+		}
+		h2 {
+			font-size: 1.75em;
+		}
+		.view_more {
+			float: right;
+			font-size: .8em;
+			margin: .75em 3.5% 0 0;
+		}
+	}
+}
+
+#top_movies {
+	border-bottom: 1px solid #d4d4d4;
+}
+
+.row {
+	width: 100%;
+	margin-bottom: 25px;
+	.post {
+		width: 22.5%;
+		float: left;
+		margin-right: 2.5%;
+		img {
+			width: 100%;
+			max-width: 100%;
+			border-radius: .5em;
+		}
+		.title {
+			font-size: 1.25em;
+			margin: 1em 0 0 0;
+			color: $main;
+		}
+		.post_info {
+			font-size: .75em;
+			color: $secondary;
+			margin: 0.5em 0;
+		}
+		h3, h4 {
+			margin-top: 3px;
+		}
+	}
+}
+
+#newsletter {
+	padding: 5em 0;
+	text-align: center;
+	background: #2a2a2e;
+	.newsletter_inner {
+		width: 600px;
+		margin: 0 auto;
 	}
 	h2 {
-		padding: 15px 5%;
+		font-size: 1.75em;
+		color: $white;
+	}
+	.sign_up_form {
+		margin-top: 3em;
+		input[type="text"], input[type="email"] {
+			width: 48%;
+			margin: 0 .5%;
+			height: 3.25em;
+			border: none;
+			outline: none;
+			border-radius: .3em;
+			background: #404043;
+			padding: .5em 1.25em;
+			font-size: .8em;
+			color: $white;
+		}
+		.button {
+			border: none;
+			outline: none;
+			padding: 1em 4.5em;
+			border-radius: 2em;
+			background: $highlight;
+			color: $white;
+			font-weight: 700;
+			font-size: .9em;
+			margin-top: 3em;
+		}
+	}
+}
+
+#main_footer {
+	padding: 2.5em 0;
+	text-align: center;
+	.logo {
+		text-transform: uppercase;
+		font-size: 1.15em;
+		font-weight: 700;
+		span {
+			font-weight: 300;
+			color: $highlight;
+		}
+	}
+	.copyright {
+		color: $secondary;
+		font-size: .75em;
 		margin: 0;
-		font-size: 20px;
-		font-weight: normal;
-		line-height: 1.5;
+	}
+	.links {
+		display: inline;
 		a {
-			color: $red;
+			color: $secondary;
+			font-size: .75em;
+			text-decoration: none;
+			margin: 0 .5em;
+			&:hover {
+				color: $highlight;
+			}
 		}
 	}
 }
 
-#recipe_top {
-	margin-bottom: 50px;
-}
 
-#recipe_info, #ingredients, #directions {
-	background: white;
-	@include box-shadow;
-	min-height: 360px;
-	border-radius: 5px;
-	padding: 2em 8%;
-}
 
-.recipe_image {
-	max-width: 100%;
-	border-radius: 5px;
-	@include box-shadow;
-}
 
-#recipe_info {
-	h1 {
-		font-size: 36px;
-		font-weight: normal;
-		color: $red;
-	}
-	.description {
-		color: #8A8A8A;
-		font-size: 20px;
-	}
-}
 
-#ingredients, #directions {
-	margin-bottom: 50px;
-	ul, ol {
-		padding-left: 18px;
-		li {
-			padding: 1em 0;
-			border-bottom: 1px solid #EAEAEA;
-		}
-	}
-}
 
-.form-inline {
-	margin-top: 15px;
-}
-.form-input {
-	width: 65% !important;
-	float: left;
-}
-.form-button {
-	float: left;
-	width: 30% !important;
-	margin-left: 5%;
-}
-.add-button {
-	margin-top: 25px;
-}
+
+
+

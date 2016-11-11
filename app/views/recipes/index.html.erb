@@ -1,0 +1,80 @@
+
+	<section id="banner" class="clearfix">
+		<div id="banner_content_wrapper">
+			<div class="indexpanel">
+				<%= image_tag("index-background.jpeg", class:"featured_image") %> 
+			</div>
+			<div id="content">
+				<h2 class="title">Planeje o cardápio da semana!</h2>
+				<p class="description">Escolha as receitas que você quer fazer na próxima semana e obtenha a lista completa do que precisa comprar no supermercado! </p>
+			</div>
+		</div>
+	</section>
+
+	<section id="top_movies" class="clearfix">
+		<div class="wrapper">
+			<header class="clearfix">
+				<h2>Receitas</h2>
+				<p class="view_more"><%= link_to "Ver todas as receitas", recipes_path %></p>
+			</header>
+
+			<% Recipe.all.in_groups_of(4) do |group| %>
+				<div class="row">
+					<% group.each do |recipe| %>
+						<% if recipe %> 
+						<div class="post">
+							<img><%= image_tag(recipe.image.url, class:"indeximage") %></img>
+							<h3><%= link_to recipe.title, recipe %></h3>
+							<p class="post_info">PG13 | 109 Minutes</p>
+						<% end %> 
+						</div>
+					<% end %> 
+				</div>
+			<% end %>  
+
+		</div>
+	</section>
+
+	<section id="top_shows" class="clearfix">
+		<div class="wrapper">
+			<header class="clearfix">
+				<h2>Listas | Cardápios </h2>
+			<p class="view_more"><%= link_to "Ver todas as receitas", recipes_path %></p>
+			</header>
+
+			<% List.all.in_groups_of(4) do |group| %>
+				<div class="row">
+					<% group.each do |list| %>
+						<% if list %> 
+						<div class="post">
+							<h3><%= link_to list.title, list %></h3>
+							<p class="post_info">PG13 | 109 Minutes</p>
+						<% end %> 
+						</div>
+					<% end %> 
+				</div>
+			<% end %>  
+
+		</div>
+	</section>
+	<section id="newsletter">
+		<div class="newsletter_inner">
+			<h2>Get the best Movie &amp; TV Show trailers straight in your inbox each week.</h2>
+			<div class="sign_up_form">
+				<input type="text" placeholder="First Name">
+				<input type="email" placeholder="Email Address">
+				<button class="button">Subscribe</button>
+			</div>
+		</div>
+	</section>
+
+	<footer id="main_footer">
+		<p class="logo">Movies<span>&amp;</span>Stuff</p>
+		<p class="copyright">&copy;2016 Movies &amp; Stuff. All Rights Reserved.</p>
+		<div class="links">
+			<a href="#">Terms of Service</a>
+			<a href="#">Privacy Policy</a>
+		</div>
+	</footer>
+</body>
+</html>
