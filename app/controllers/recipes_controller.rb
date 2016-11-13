@@ -5,7 +5,7 @@ class RecipesController < ApplicationController
 
 	def index
 		## ordena as receitas por tempo de criação
-		@recipe = Recipe.all.order("created_at DESC").limit(8)
+		@recipes = Recipe.all.order("created_at DESC").limit(8)
 		@list = List.all.order("created_at DESC")
 	end
 

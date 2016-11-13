@@ -1,57 +1,55 @@
-<p id="notice"><%= notice %></p>
-
-<h1><%= @list.title %></h1>
-
-
-<p>
-<%= @list.description %>
-</p>
-
+<section id="indexbanner" class="clearfix">
+		<div id="banner_content_wrapper">
+			<div class="showpanel">
+				<%= image_tag("index-background.jpeg", class:"featured_image") %> 
+			</div>
+			<div id="showcontent">
+				<h2 class="title"><%= @list.title %></h2>
+				<p class="description"><%= @list.description %></p>
+				<p id="createdby"><%= @list.user.email %></p>
+			</div>
+		</div>
+	</section>
 <!-- <b>IDs da Listing:</b>
 <p><% @list.listings.each do |a| %>
  <%= a.recipe.title %> 
 <% end %> --> 
 
-<p>
-  <strong>criado por:</strong>
-  <%= @list.user.email %>
-</p>
-<p>
-
-
-<div class="row">
-	
-	<div class="col-md-6" id="lista">
-		<h3> LISTA DE COMPRAS </h3>
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<% @ingredientsconsolidated.each do |key, unit| %>
-				<p>-<%= unit %>  
-					<% key.each do |measure, name| %> 
-						<%= name %>
-						<%= measure %>
-						<% end %></p>
-				<% end %>
+<div class="wrapper">
+	<div class="row">
+		
+		<div class="col-md-6" id="lista">
+			<h3> LISTA DE COMPRAS </h3>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<% @ingredientsconsolidated.each do |key, unit| %>
+					<p>-<%= unit %>  
+						<% key.each do |measure, name| %> 
+							<%= name %>
+							<%= measure %>
+							<% end %></p>
+					<% end %>
+				</div>
 			</div>
+		</div> 
+		<div class="col-md-6" id="receitas">
+			<h2> RECEITAS </h2>
+		  	<% @list.recipes.each_slice(2) do |recipes| %>
+		  		<% recipes.each do |recipe| %>
+		  			<div class="col-md-6">
+						<div class="panel panel-default recipe">
+							<%= image_tag(recipe.image.url) %>
+							<strong><%= link_to recipe.title, recipe_path %></strong>
+							<p><% recipe.ingredients.each do |ingredient| %></p>
+							<p><%= ingredient.unit %> <%= ingredient.measure %> | <%= ingredient.name %></p>	
+							<% end %> 	
+						</div>
+					</div>
+				<% end %>
+			<% end %> 
 		</div>
 	</div> 
-	<div class="col-md-6" id="receitas">
-		<h2> RECEITAS </h2>
-	  	<% @list.recipes.each_slice(2) do |recipes| %>
-	  		<% recipes.each do |recipe| %>
-	  			<div class="col-md-6">
-					<div class="panel panel-default recipe">
-						<%= image_tag(recipe.image.url) %>
-						<strong><%= link_to recipe.title, recipe_path %></strong>
-						<p><% recipe.ingredients.each do |ingredient| %></p>
-						<p><%= ingredient.unit %> <%= ingredient.measure %> | <%= ingredient.name %></p>	
-						<% end %> 	
-					</div>
-				</div>
-			<% end %>
-		<% end %> 
-	</div>
-</div> 
+</div>
 
 <%= link_to 'Editar Lista', edit_list_path(@list) %> |
 <%= link_to 'Voltar', lists_path %>

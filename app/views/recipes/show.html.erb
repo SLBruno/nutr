@@ -1,0 +1,118 @@
+<section id="showrecipebanner" class="clearfix">
+		<div class="wrapper">
+			<div class="col-md-5 col-xs-12 showpanel">
+				<%= image_tag(@recipe.image.url(:medium), class:"featured_image") %> 
+			</div>
+			<div id="col-md-7 col-xs-12 indexcontent">
+				<h2 class="title"><%= @recipe.title %></h2>
+				<p class="description"><%= @recipe.description %></p>
+				<p class="submitted"><b>Enviado por:</b><%= @recipe.user.email %></p>
+
+				
+				<% if user_signed_in? %>
+					<div class="positionrelative">  
+						<div class="dropdown">
+						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    Adicione à uma Lista!
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						    <% current_user.lists.each do |list| %>
+								<li><%= link_to list.title, {:controller => "recipes", :action => "listit", :list_id => list.id } %></li>
+							<% end %>
+								<li><%= link_to "Criar nova lista", new_list_path %></li>
+						  </ul>
+						</div>
+					</div>
+				<% end %> 
+				</p>
+			</div>
+		</div>
+</section>
+<section id="recipeshowsection">
+	<div class="recipeattrwrapper">
+		<div class="recipeattr" id="attr1">
+			<h4><b><%= @recipe.ingredients.count %></b></h4>
+			<h5> Ingredientes </h5>
+		</div>
+		<div class="recipeattr" id="attr2">
+			<h4>340</b></h4>
+			<h5> Calorias </h5>
+		</div>
+		<div class="recipeattr" id="attr3">
+			<h4><b> 20min </h4>
+			<h5> Tempo de Preparação </h5>
+		</div>
+		<div class="recipeattr" id="attr4">
+			<span class="glyphicon glyphicon-heart" aria-hidden="true" style="font-size:25px;"></span>
+			<h5> Favorite para depois! </h5>
+		</div>
+		<div class="recipeattr" id="attr5">
+			<p>
+				<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+
+			</p>
+			<h5> Avalie a Receita! </h5>
+		</div>
+
+	</div>
+</section>
+<section class=defaultbackground>
+	<div class="wrappermedium">
+		<div class="row"> 
+			<div class="col-md-6 col-xs-12">
+				<div class=""> 
+					<h2> Ingredientes </h2>
+					<% @recipe.ingredients.each do |ingredient| %>
+						<ul>
+							<li><%= ingredient.unit %> <%= ingredient.measure %> | <%= ingredient.name %></li>
+						</ul>
+					<% end %> 	
+				</div>
+			</div>
+
+			<div class="col-md-6 col-xs-12">
+				<h2> Direções </h2>
+					<ul>
+						<% @recipe.directions.each do |direction| %> 
+							<li><%= direction.step %></li> 
+						<% end %> 
+					</ul>
+			</div>
+		</div>
+
+		<% if user_signed_in? %>
+		 	<div class="row" >
+			 	<div class="col-md-6 col-xs-12">
+				 	<h4>Esta receita está presente nas seguintes listas: </h4>
+					<% @recipe.lists.each do |list| %>
+						<ul>
+							<li><%= list.title %></li>
+						</ul>
+					<% end %> 
+			 	</div>
+				<div class="col-md-6 col-xs-12">
+					<h4>Selecione uma de suas listas para adicionar a sua receita! </h4>
+					<% current_user.lists.each do |list| %>
+						<p><%= link_to list.title, {:controller => "recipes", :action => "listit", :list_id => list.id } %></p>
+					<% end %> 
+				</div>
+			</div>
+		<% end %>
+
+		
+		<% if current_user.email == @recipe.user.email %>
+			<p>
+				<%= link_to "Voltar", root_path, class: "btn btn-default" %>
+				<%= link_to "Editar", edit_recipe_path, class: "btn btn-default" %>
+				<%= link_to "Deletar", recipe_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"%>
+			</p>
+			<% else %>
+				<%= link_to "Voltar", root_path, class: "btn btn-default" %>
+		<% end %>
+	</div>
+</section>

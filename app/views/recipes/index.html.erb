@@ -1,33 +1,30 @@
 
-	<section id="banner" class="clearfix">
+	<section id="indexbanner" class="clearfix">
 		<div id="banner_content_wrapper">
-			<div class="indexpanel">
-				<%= image_tag("index-background.jpeg", class:"featured_image") %> 
-			</div>
-			<div id="content">
+			<div id="indexcontent">
 				<h2 class="title">Planeje o cardápio da semana!</h2>
 				<p class="description">Escolha as receitas que você quer fazer na próxima semana e obtenha a lista completa do que precisa comprar no supermercado! </p>
 			</div>
 		</div>
 	</section>
 
-	<section id="top_movies" class="clearfix">
+	<section id="top_recipes" class="clearfix">
 		<div class="wrapper">
 			<header class="clearfix">
-				<h2>Receitas</h2>
+				<h2>Encontre Receitas</h2>
 				<p class="view_more"><%= link_to "Ver todas as receitas", recipes_path %></p>
 			</header>
 
-			<% Recipe.all.in_groups_of(4) do |group| %>
+			<% @recipes.in_groups_of(4) do |group| %>
 				<div class="row">
 					<% group.each do |recipe| %>
 						<% if recipe %> 
-						<div class="post">
-							<img><%= image_tag(recipe.image.url, class:"indeximage") %></img>
-							<h3><%= link_to recipe.title, recipe %></h3>
-							<p class="post_info">PG13 | 109 Minutes</p>
-						<% end %> 
-						</div>
+							<div class="post">
+								<img><%= image_tag(recipe.image.url, class:"indeximage") %></img>
+								<h3><%= link_to recipe.title, recipe %></h3>
+								<p class="post_info"> 230 kcal | 1 porção | 109 Minutes </p>
+							<% end %> 
+							</div>
 					<% end %> 
 				</div>
 			<% end %>  
@@ -35,10 +32,10 @@
 		</div>
 	</section>
 
-	<section id="top_shows" class="clearfix">
+	<section id="top_lists" class="clearfix">
 		<div class="wrapper">
 			<header class="clearfix">
-				<h2>Listas | Cardápios </h2>
+				<h2>Encontre Listas de Compras para a semana! </h2>
 			<p class="view_more"><%= link_to "Ver todas as receitas", recipes_path %></p>
 			</header>
 
@@ -59,11 +56,11 @@
 	</section>
 	<section id="newsletter">
 		<div class="newsletter_inner">
-			<h2>Get the best Movie &amp; TV Show trailers straight in your inbox each week.</h2>
+			<h2> Receba novas <b>ideias de cardápios</b> em sua caixa de emails todas as semanas!</h2>
 			<div class="sign_up_form">
-				<input type="text" placeholder="First Name">
-				<input type="email" placeholder="Email Address">
-				<button class="button">Subscribe</button>
+				<input type="text" placeholder="Nome">
+				<input type="email" placeholder="Email">
+				<button class="button">Inscreva-se</button>
 			</div>
 		</div>
 	</section>
