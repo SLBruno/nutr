@@ -1,22 +1,19 @@
 <section id="showrecipebanner" class="clearfix">
 		<div class="wrapper">
-			<div class="col-md-5 col-xs-12 showpanel">
-				<%= image_tag(@recipe.image.url(:medium), class:"featured_image") %> 
-			</div>
-			<div id="col-md-7 col-xs-12 indexcontent">
+			<div class="col-md-6 col-xs-12 indexcontent">
 				<h2 class="title"><%= @recipe.title %></h2>
 				<p class="description"><%= @recipe.description %></p>
-				<p class="submitted"><b>Enviado por:</b><%= @recipe.user.email %></p>
+				<p class="submitted"><b>Enviado por: </b><%= @recipe.user.email %></p>
 
 				
 				<% if user_signed_in? %>
 					<div class="positionrelative">  
 						<div class="dropdown">
-						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						  <button class="btn btn-default dropdown-toggle btn-list" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 						    Adicione à uma Lista!
 						    <span class="caret"></span>
 						  </button>
-						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 						    <% current_user.lists.each do |list| %>
 								<li><%= link_to list.title, {:controller => "recipes", :action => "listit", :list_id => list.id } %></li>
 							<% end %>
@@ -26,6 +23,9 @@
 					</div>
 				<% end %> 
 				</p>
+			</div>
+			<div class="col-md-5 col-md-offset-1 col-xs-12 showpanel">
+				<%= image_tag(@recipe.image.url(:medium), class:"featured_image") %> 
 			</div>
 		</div>
 </section>
@@ -61,7 +61,7 @@
 
 	</div>
 </section>
-<section class=defaultbackground>
+<section class="defaultbackground">
 	<div class="wrappermedium">
 		<div class="row"> 
 			<div class="col-md-6 col-xs-12">
@@ -105,14 +105,19 @@
 		<% end %>
 
 		
-		<% if current_user.email == @recipe.user.email %>
-			<p>
-				<%= link_to "Voltar", root_path, class: "btn btn-default" %>
-				<%= link_to "Editar", edit_recipe_path, class: "btn btn-default" %>
-				<%= link_to "Deletar", recipe_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"%>
-			</p>
-			<% else %>
-				<%= link_to "Voltar", root_path, class: "btn btn-default" %>
-		<% end %>
+		<% if user_signed_in? %> 
+			<% if current_user.email == @recipe.user.email %>
+				<p>
+					<%= link_to "Voltar", root_path, class: "btn btn-default" %>
+					<%= link_to "Editar", edit_recipe_path, class: "btn btn-default" %>
+					<%= link_to "Deletar", recipe_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"%>
+				</p>
+				<% else %>
+					<%= link_to "Voltar", root_path, class: "btn btn-default" %>
+			<% end %>
+		<% else %> 
+			<%= link_to "Voltar", root_path, class: "btn btn-default" %>
+		<% end %> 
+
 	</div>
 </section>

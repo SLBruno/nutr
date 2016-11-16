@@ -55,7 +55,7 @@ end
 
     respond_to do |format|
       if @list.save
-        format.html { redirect_to @list, notice: 'A Lista foi criada!.' }
+        format.html { redirect_to @list, notice: 'A lista foi criada!' }
         format.json { render :show, status: :created, location: @list }
       else
         format.html { render :new }
@@ -69,7 +69,7 @@ end
   def update
     respond_to do |format|
       if @list.update(list_params)
-        format.html { redirect_to @list, notice: 'A Lista foi atualizada!' }
+        format.html { redirect_to @list, notice: 'A lista foi atualizada!' }
         format.json { render :show, status: :ok, location: @list }
       else
         format.html { render :edit }
@@ -83,7 +83,7 @@ end
   def destroy
     @list.destroy
     respond_to do |format|
-      format.html { redirect_to lists_url, notice: 'List was successfully destroyed.' }
+      format.html { redirect_to lists_url, notice: 'A lista foi excluída com sucesso.' }
       format.json { head :no_content }
     end
   end

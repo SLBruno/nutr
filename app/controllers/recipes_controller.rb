@@ -19,7 +19,7 @@ class RecipesController < ApplicationController
 		@list = List.find(params[:list_id])
 		#criar a associação Listing entre receita e lista
 		@listing = Listing.create(:recipe_id => @recipe.id, :list_id => @list.id, :portionquantity => 1)
-		redirect_to @recipe, notice: "deu certo"	
+		redirect_to @recipe, notice: "Você salvou uma receita em sua lista"	
 	end 
 
 
@@ -60,7 +60,7 @@ class RecipesController < ApplicationController
 
 	def destroy
 		@recipe.destroy
-		redirect_to root_path, notice: "Successfully deleted recipe"
+		redirect_to root_path, notice: "Receita deletada com sucesso"
 	end
 
 	private
