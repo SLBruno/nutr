@@ -8,7 +8,7 @@ Rails.application.routes.draw do
  		end 
  	end 
 
- 	root "recipes#index"
+ 	root "recipes#home"
 
   	
 

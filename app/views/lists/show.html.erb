@@ -15,7 +15,38 @@
 <p><% @list.listings.each do |a| %>
  <%= a.recipe.title %> 
 <% end %> --> 
+<section id="recipeshowsection">
+	<div class="recipeattrwrapper">
+		<div class="recipeattr" id="attr1">
+			<h4><b><%= @list.recipes.count %></b></h4>
+			<h5> Receitas </h5>
+		</div>
+		<div class="recipeattr" id="attr2">
+			<h4>340</b></h4>
+			<h5> Calorias </h5>
+		</div>
+		<div class="recipeattr" id="attr3">
+			<h4><b> 20min </h4>
+			<h5> Tempo de Preparação </h5>
+		</div>
+		<div class="recipeattr" id="attr4">
+			<span class="glyphicon glyphicon-heart" aria-hidden="true" style="font-size:25px;"></span>
+			<h5> Favorite para depois! </h5>
+		</div>
+		<div class="recipeattr" id="attr5">
+			<p>
+				<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
 
+			</p>
+			<h5> Avalie essa lista! </h5>
+		</div>
+
+	</div>
+</section>
 <section class="defaultbackground">
 	<div class="wrapper">
 		<div class="row">

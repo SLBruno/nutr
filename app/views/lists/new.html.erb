@@ -1,5 +1,16 @@
-<h1>New list</h1>
+<div class="wrapper"> 
+
+<h1>Criar nova Lista</h1>
+
+<% if user_signed_in? %> 
 
 <%= render 'form' %>
 
-<%= link_to 'Back', lists_path %>
+<% else %>
+
+<% controller.redirect_to new_user_session_path, alert: "Você precisa estar logado para criar uma nova lista" %>
+<% end %> 
+
+<%= link_to 'Voltar', lists_path %>
+
+</div>

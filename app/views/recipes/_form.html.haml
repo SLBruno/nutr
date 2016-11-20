@@ -1,4 +1,4 @@
-= simple_form_for @recipe, html: { multipart: true } do |f|
+= simple_form_for @recipe, class:"form-inline", html: { multipart: true } do |f|
 	- if @recipe.errors.any?
 		#errors
 			%p
@@ -7,26 +7,33 @@
 			%ul
 				- @recipe.errors.full_messages.each do |msg|
 					%li= msg
-	.panel-body
-		= f.input :title, input_html: { class: 'form-control' }
-		= f.input :description, input_html: { class: 'form-control' }
-		= f.input :image, input_html: { class: 'form-control' }
+	.form-inline
+		= f.input :title, label:"Título", placeholder: "como chama sua receita?", input_html: { class: 'form-control' }
+		= f.input :description, label:"Descrição", placeholder: "Descreva de forma rápida o que é sua receita. Ela é rápida, veio de uma receita milenar da sua avó? É boa para quais ocasiões?", input_html: { class: 'form-control' }
+		= f.input :image, label:"Envie uma imagem!", input_html: { class: 'form-control' }
 
-		.row
-			.col-md-6
-				%h3 Ingredients
-				#ingredients
-					= f.simple_fields_for :ingredients do |ingredient|
-						= render 'ingredient_fields', f: ingredient
-					.links
-						= link_to_add_association 'Add Ingredient', f, :ingredients, class: "btn btn-default add-button"
+		.col-md-6.col-xs-12
+			= f.input :time, label:"Tempo de Preparo", placeholder: "em minutos", input_html: { class: 'form-control form-col-6' }
+
+		.col-md-6.col-xs-12
+			= f.input :calories, label:"Calorias Totais", placeholder: "kcal", input_html: { class: 'form-control form-col-6' }
+
+		.row.margintop	
+			%h3 Ingredientes
+			%h6 Coloque um ingrediente por vez e vá apertando o botão!
+			#ingredients
+				= f.simple_fields_for :ingredients do |ingredient|
+					= render 'ingredient_fields', f: ingredient
+				.links
+				= link_to_add_association 'Adicionar ingrediente', f, :ingredients, class: "btn btn-default add-button"
 
 			.col-md-6
-				%h3 Directions
+				%h3 Modo de Preparo
+				%h6 Acrescente um passo por vez e vá clicando no botão para adicionar mais!
 				#directions
 					= f.simple_fields_for :directions do |direction|
 						= render 'direction_fields', f: direction
 					.links
-						= link_to_add_association 'Add Step', f, :directions, class: "btn btn-default add-button"
+						= link_to_add_association 'Adicionar modo de preparo', f, :directions, class: "btn btn-default add-button"
 
-	= f.button :submit, class: "btn btn-primary"
+	= f.button :submit, "Criar Receita", class: "btn btn-primary btn-highlight"

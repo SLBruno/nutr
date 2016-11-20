@@ -51,7 +51,7 @@ end
   # POST /lists
   # POST /lists.json
   def create
-    @list = List.new(list_params)
+    @list = current_user.lists.build(list_params)
 
     respond_to do |format|
       if @list.save
@@ -98,6 +98,12 @@ end
     def list_params
       params.require(:list).permit(:title, :description, :user_id)
     end
+
+    def set_user
+      if user_signed_in?
+        @user = current_user
+      end
+    end 
 
     #def multiply_by_portionquantity
       #puxo todas as receitas desta lista

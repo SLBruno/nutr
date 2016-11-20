@@ -1,0 +1,7 @@
+<div class="form-inline clearfix "> 
+	<div class="form-group"> 
+		<%= f.input :unit, placeholder:"Quantidade", label:false,  input_html: { class: 'form-horizontal form-unit' }%><%= f.input :measure, placeholder:"Unidade de Medida", label:false,  input_html: { class:'form-horizontal form-measure' } %><%= f.input :name, placeholder:"Nome do Ingrediente", label:false,  input_html: { class: 'form-horizontal form-name' } %> 
+		<%= link_to_remove_association "Remover", f, class: "form-button btn btn-default" %> 
+
+	</div> 
+</div> 

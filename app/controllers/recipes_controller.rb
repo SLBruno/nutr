@@ -1,13 +1,18 @@
 class RecipesController < ApplicationController
 	require 'unitwise'
 	before_action :find_recipe, only: [:show, :edit, :update, :destroy]
-	before_action :authenticate_user!, except: [:index, :show]
+	before_action :authenticate_user!, except: [:index, :show, :home]
 
-	def index
+	def home
 		## ordena as receitas por tempo de criação
 		@recipes = Recipe.all.order("created_at DESC").limit(8)
 		@list = List.all.order("created_at DESC")
 	end
+
+	def index
+		@recipes = Recipe.all.order("created_at DESC")
+		@userrecipes = current_user.recipes
+	end 
 
 	def show
 		@recipe = find_recipe
